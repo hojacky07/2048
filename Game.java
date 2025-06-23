@@ -36,11 +36,24 @@ public class Game extends PApplet{
         p.text("2048", 40, 80);
 
         //Score 
+        p.textAlign(LEFT);
         p.fill(accent3[0],accent3[1],accent3[2]);
         p.rect(400, 27.5f, 90, 61.25f, 5);
         p.rect(300, 27.5f, 90, 61.25f, 5);
 
+        p.fill(accent2[0], accent2[1], accent2[2]);
+        p.textFont(boldFont);
+        p.text("SCORE", 316.25f, 47.5f);
+        p.text("BEST", 422.5f, 47.5f);
+        p.fill(255);
+        p.textAlign(CENTER);
+        p.textFont(boldFont);
+        p.text(score, 342.5f, 70);
+        p.text(bestScore, 442.5f, 70);
+
+
         // Game Instructions
+        p.textAlign(LEFT);
         p.fill(accent1[0], accent1[1], accent1[2]);
         p.textFont(regularFont);
         p.text("Join numbers to get to the               !", 40, 135);
@@ -53,7 +66,7 @@ public class Game extends PApplet{
         p.rect(375, 112.5f, 115, 35, 5);
 
         p.fill(255);
-        p.textFont(regularFont);
+        p.textFont(boldFont);
         p.text("New Game", 530 - p.textWidth("New Game") - 57.5f, 135);
 
         // 2048 Game Grid
@@ -84,14 +97,16 @@ public class Game extends PApplet{
             } else {
                 score = 0;
             }
+        } else {
+            score += 10;
         }
     }
 
-    public void keyPressed() {
+    public void keyPressed(char key, int keyCode) {
         
     }
     
-    public void keyReleased() {
+    public void keyReleased(char key, int keyCode) {
 
     }
 }

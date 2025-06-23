@@ -34,10 +34,10 @@ public class Start extends PApplet {
     }
 
     public void keyPressed() {
-        quickGame.keyPressed();
+        quickGame.keyPressed(key, keyCode);
     }
 
     public void keyReleased() {
-        quickGame.keyReleased();
+        quickGame.keyReleased(key, keyCode);
     }
 }  
