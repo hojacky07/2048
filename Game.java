@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 import processing.core.PApplet;
 import processing.core.PFont;
+import processing.core.PImage;
 
 public class Game extends PApplet{
 
@@ -11,6 +12,8 @@ public class Game extends PApplet{
     PFont titleFont;
 
     PApplet p;
+
+    PImage btnHome;
 
     int[][] board = new int[4][4];
     int score = 0;
@@ -22,89 +25,102 @@ public class Game extends PApplet{
     // Game Colors
     float[][] colors = new float[4][3];
 
-    public Game (PApplet p, PFont regularFont, PFont boldFont, PFont titleFont) {
+    public Game (PApplet p, PFont regularFont, PFont boldFont, PFont titleFont, PImage btnHome) {
         this.p = p;
         this.regularFont = regularFont;
         this.boldFont = boldFont;
         this.titleFont = titleFont;
+        this.btnHome = btnHome;
     }
 
     public void display() {
-
         new GameColors(1, colors);
 
-        //Title
+        if (score > bestScore) {
+            bestScore = score;
+        }
+
+        // Title
         p.textAlign(LEFT);
         p.fill(colors[0][0], colors[0][1], colors[0][2]);
         p.textFont(titleFont);
-        p.text("2048", 40, 80);
+        p.text("2048", 40, 90);
 
-        //Score 
-        p.fill(colors[2][0],colors[2][1],colors[2][2]);
-        p.rect(400, 27.5f, 90, 61.25f, 5);
-        p.rect(300, 27.5f, 90, 61.25f, 5);
+        // Score
+        p.fill(colors[2][0], colors[2][1], colors[2][2]);
+        p.rect(400, 37.5f, 90, 61.25f, 5);
+        p.rect(300, 37.5f, 90, 61.25f, 5);
 
         p.fill(colors[1][0], colors[1][1], colors[1][2]);
         p.textFont(boldFont);
-        p.text("SCORE", 316.25f, 47.5f);
-        p.text("BEST", 422.5f, 47.5f);
+        p.text("SCORE", 316.25f, 57.5f);
+        p.text("BEST", 422.5f, 57.5f);
         p.fill(255);
         p.textAlign(CENTER);
         p.textFont(boldFont);
-        p.text(score, 342.5f, 72.5f);
-        p.text(bestScore, 442.5f, 72.5f);
-
+        p.text(score, 342.5f, 82.5f);
+        p.text(bestScore, 442.5f, 82.5f);
 
         // Game Instructions
         p.textAlign(LEFT);
         p.fill(colors[0][0], colors[0][1], colors[0][2]);
         p.textFont(regularFont);
-        p.text("Join numbers to get to the               !", 40, 135);
+        p.textSize(14);
+        p.text("Join numbers to get to the               !", 40, 145);
         p.textFont(boldFont);
-        p.text("2048 tile",228, 135);
-
+        p.textSize(14);
+        p.text("2048 tile", 205, 145);
+        
         // New Game Button
         p.noStroke();
         p.fill(colors[3][0], colors[3][1], colors[3][2]);
-        p.rect(375, 112.5f, 115, 35, 5);
+        p.rect(330, 122.5f, 115, 35, 5);
 
         p.fill(255);
         p.textFont(boldFont);
-        p.text("New Game", 530 - p.textWidth("New Game") - 57.5f, 135);
+        p.text("New Game", 330 + (115 - p.textWidth("New Game"))/2, 145);
 
-        // 2048 Game Grid
+
+        // Home Button
+        p.noStroke();
+        p.fill(colors[3][0], colors[3][1], colors[3][2]);
+        p.rect(455, 122.5f, 35, 35, 5);
+
+        p.image(btnHome, 462.5f, 130, 20, 20);
+
+        // Game Grid
         p.noStroke();
         p.fill(colors[2][0], colors[2][1], colors[2][2]);
-        p.rect(40, 170, 450, 450, 5);
+        p.rect(40, 180, 450, 450, 5);
 
-        for (int i = 0; i < 4; i ++) {
-            for (int j = 0; j < 4; j ++) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
                 p.noStroke();
                 p.fill(colors[1][0], colors[1][1], colors[1][2]);
-                p.rect(50 + 110 * i, 180 + 110 * j, 100, 100, 5);
+                p.rect(50 + 110 * i, 190 + 110 * j, 100, 100, 5);
             }
         }
 
-        //Game Tiles 
+        // Game Tiles
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 int value = board[i][j];
                 if (value != 0) {
-
                     p.noStroke();
                     p.fill(colors[1][0], colors[1][1], colors[1][2]);
-                    p.rect(50 + 110 * j, 180 + 110 * i, 100, 100, 5);
+                    p.rect(50 + 110 * j, 190 + 110 * i, 100, 100, 5);
 
-                    p.fill(255); 
+                    p.fill(255);
                     p.textAlign(CENTER, CENTER);
                     p.textFont(boldFont);
                     p.textSize(32);
-                    p.text(value, 50 + 110 * j + 50, 180 + 110 * i + 45);
+                    p.text(value, 50 + 110 * j + 50, 190 + 110 * i + 45);
                 }
             }
         }
 
-        if (p.mouseX >= 375 && p.mouseX <= 490 && p.mouseY >= 112.5f && p.mouseY <= 147.5f) {
+        //Change Cursor
+        if ((p.mouseX >= 330 && p.mouseX <= 445 && p.mouseY >= 122.5f && p.mouseY <= 157.5f) || (p.mouseX >= 455 && p.mouseX <= 490 && p.mouseY >= 122.5f && p.mouseY <= 157.5f)) {
             p.cursor(HAND);
         } else {
             p.cursor(ARROW);
@@ -147,11 +163,11 @@ public class Game extends PApplet{
     }
 
     public void mousePressed() {
-        if (p.mouseX >= 375 && p.mouseX <= 490 && p.mouseY >= 112.5 && p.mouseY <= 147.5f) {
-            if (score > bestScore) {
-                bestScore = score;
-            }
+        if (p.mouseX >= 330 && p.mouseX <= 445 && p.mouseY >= 122.5f && p.mouseY <= 157.5f) {
             startGame();
+        }
+        if (p.mouseX >= 455 && p.mouseX <= 490 && p.mouseY >= 122.5f && p.mouseY <= 157.5f) {
+            Start.start = false;
         }
     }
 
@@ -287,7 +303,4 @@ public class Game extends PApplet{
         
     }
     
-    public void keyReleased(char key, int keyCode) {
-
-    }
 }
