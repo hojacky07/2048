@@ -1,53 +1,53 @@
 public class GameColors {
 
-    public GameColors(int colorSet, float[] accent1, float[] accent2, float[] accent3, float[] accent4) {
+    public GameColors(int colorSet, float[][] colors) {
         
         // Default Colors
         if (colorSet == 0) {
 
             //Text
-            accent1[0] = 123;
-            accent1[1] = 110;
-            accent1[2] = 101;
+            colors[0][0] = 123;
+            colors[0][1] = 110;
+            colors[0][2] = 101;
 
             //Tiles
-            accent2[0] = 208;
-            accent2[1] = 191;
-            accent2[2] = 180;
+            colors[1][0] = 208;
+            colors[1][1] = 191;
+            colors[1][2] = 180;
 
             //Grid & Scores
-            accent3[0] = 191;
-            accent3[1] = 172;
-            accent3[2] = 160;
+            colors[2][0] = 191;
+            colors[2][1] = 172;
+            colors[2][2] = 160;
 
             //Button
-            accent4[0] = 148;
-            accent4[1] = 121;
-            accent4[2] = 101;
+            colors[3][0] = 148;
+            colors[3][1] = 121;
+            colors[3][2] = 101;
         }
 
         // Green Scheme
         if (colorSet == 1) {
 
             //Text
-            accent1[0] = 107;
-            accent1[1] = 125;
-            accent1[2] = 101;
+            colors[0][0] = 107;
+            colors[0][1] = 125;
+            colors[0][2] = 101;
 
             //Tiles
-            accent2[0] = 192;
-            accent2[1] = 210;
-            accent2[2] = 180;
+            colors[1][0] = 192;
+            colors[1][1] = 210;
+            colors[1][2] = 180;
 
             //Grid & Scores
-            accent3[0] = 175;
-            accent3[1] = 193;
-            accent3[2] = 160;
+            colors[2][0] = 175;
+            colors[2][1] = 193;
+            colors[2][2] = 160;
 
             //Button
-            accent4[0] = 132;
-            accent4[1] = 150;
-            accent4[2] = 101;
+            colors[3][0] = 132;
+            colors[3][1] = 150;
+            colors[3][2] = 101;
         }
 
 
