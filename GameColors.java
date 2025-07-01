@@ -50,6 +50,29 @@ public class GameColors {
             colors[3][2] = 101;
         }
 
+        // Purple Theme
+        if (colorSet == 2) {
+
+            //Text
+            colors[0][0] = 110;
+            colors[0][1] = 101;
+            colors[0][2] = 123;
+
+            //Tiles
+            colors[1][0] = 191;
+            colors[1][1] = 180;
+            colors[1][2] = 208;
+
+            //Grid & Scores
+            colors[2][0] = 172;
+            colors[2][1] = 160;
+            colors[2][2] = 191;
+
+            //Button
+            colors[3][0] = 121;
+            colors[3][1] = 101;
+            colors[3][2] = 148;
+        }
 
     }
 }

@@ -19,6 +19,7 @@ public class Game extends PApplet{
     int score = 0;
     int bestScore = 0;
 
+    boolean gameOver;
     boolean merged;
     boolean moved;
 
@@ -35,6 +36,9 @@ public class Game extends PApplet{
     }
 
     public void display() {
+
+        gameOver = isGameOver();
+
 
         if (score > bestScore) {
             bestScore = score;
@@ -61,15 +65,24 @@ public class Game extends PApplet{
         p.text(score, 342.5f, 82.5f);
         p.text(bestScore, 442.5f, 82.5f);
 
+
         // Game Instructions
-        p.textAlign(LEFT);
-        p.fill(colors[0][0], colors[0][1], colors[0][2]);
-        p.textFont(regularFont);
-        p.textSize(14);
-        p.text("Join numbers to get to the               !", 40, 145);
-        p.textFont(boldFont);
-        p.textSize(14);
-        p.text("2048 tile", 205, 145);
+        if (Start.page == "quick game") {
+            p.textAlign(LEFT);
+            p.fill(colors[0][0], colors[0][1], colors[0][2]);
+            p.textFont(regularFont);
+            p.textSize(14);
+            p.text("Join numbers to get to the               !", 40, 145);
+            p.textFont(boldFont);
+            p.textSize(14);
+            p.text("2048 tile", 205, 145);
+        } else {
+            p.textAlign(LEFT);
+            p.fill(colors[0][0], colors[0][1], colors[0][2]);
+            p.textFont(regularFont);
+            p.textSize(14);
+            p.text("Reach the highest score by joining tiles!", 40, 145);
+        }
         
         // New Game Button
         p.noStroke();
@@ -115,12 +128,15 @@ public class Game extends PApplet{
                     p.textFont(boldFont);
                     p.textSize(32);
                     p.text(value, 50 + 110 * j + 50, 190 + 110 * i + 45);
+                    if (Start.page == "quick game" && value == 2048) {
+                        gameOver = true;
+                    }
                 }
             }
         }
 
         //Game Over Screen
-        if (isGameOver()) {
+        if (gameOver) {
             p.fill(255,100);
             p.rect(40, 180, 450, 450, 5);
 
@@ -139,7 +155,7 @@ public class Game extends PApplet{
         }
 
         //Change Cursor
-        if ((p.mouseX >= 330 && p.mouseX <= 445 && p.mouseY >= 122.5f && p.mouseY <= 157.5f) || (p.mouseX >= 455 && p.mouseX <= 490 && p.mouseY >= 122.5f && p.mouseY <= 157.5f) || ((p.mouseX >= 207.5f && p.mouseX <= 322.5f && p.mouseY >= 465f && p.mouseY <= 500f) && isGameOver())) {
+        if ((p.mouseX >= 330 && p.mouseX <= 445 && p.mouseY >= 122.5f && p.mouseY <= 157.5f) || (p.mouseX >= 455 && p.mouseX <= 490 && p.mouseY >= 122.5f && p.mouseY <= 157.5f) || ((p.mouseX >= 207.5f && p.mouseX <= 322.5f && p.mouseY >= 465f && p.mouseY <= 500f) && gameOver)) {
             p.cursor(HAND);
         } else {
             p.cursor(ARROW);
@@ -243,7 +259,7 @@ public class Game extends PApplet{
         if (p.mouseX >= 455 && p.mouseX <= 490 && p.mouseY >= 122.5f && p.mouseY <= 157.5f) {
             Start.page = "home";
         }
-        if (isGameOver()) {
+        if (gameOver) {
             if (p.mouseX >= 207.5f && p.mouseX <= 322.5f && p.mouseY >= 465f && p.mouseY <= 500f) {
                 startGame();
             }

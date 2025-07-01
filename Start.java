@@ -8,7 +8,7 @@ import processing.core.PImage;
 
 public class Start extends PApplet {
 
-    Game quickGame;
+    Game game;
     
     PFont regularFont;
     PFont boldFont;
@@ -33,7 +33,7 @@ public class Start extends PApplet {
         btnHome = loadImage("home.png");
         new GameColors(colorSet, colors);
 
-        quickGame = new Game(this, regularFont, boldFont, titleFont, btnHome, colors);
+        game = new Game(this, regularFont, boldFont, titleFont, btnHome, colors);
     }
 
     public void draw() {
@@ -41,9 +41,8 @@ public class Start extends PApplet {
         new GameColors(colorSet, colors);
         if (page == "home") {
             displayStartScreen();
-        }
-        if (page == "quick game") {
-            quickGame.display();
+        } else {
+            game.display();
         }
     }
     
@@ -107,7 +106,7 @@ public class Start extends PApplet {
             stroke(200);
         }
 
-        fill(125, 105, 225);
+        fill(121, 101, 148);
         ellipse(width / 2 + 70, 460, 30, 30);
     }
 
@@ -116,11 +115,11 @@ public class Start extends PApplet {
             if (mouseX >= width / 2 - 100 && mouseX <= width / 2 + 100) {
                 if (mouseY >= 290 && mouseY <= 340) {
                     page = "quick game";
-                    quickGame.startGame();
+                    game.startGame();
                 }
                 if (mouseY >= 360 && mouseY <= 410) {
-                    page = "quick game"; 
-                    quickGame.startGame();
+                    page = "unlimited"; 
+                    game.startGame();
                 }
             }
 
@@ -132,11 +131,11 @@ public class Start extends PApplet {
                 colorSet = 2;
             }
         } else {
-            quickGame.mousePressed();
+            game.mousePressed();
         }
     }
 
     public void keyPressed() {
-        quickGame.keyPressed(key, keyCode);
+        game.keyPressed(key, keyCode);
     }
 }  
